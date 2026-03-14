@@ -5,6 +5,7 @@ import prisma from "@/lib/prisma";
 export async function POST(req: NextRequest) {
   try {
     const { userName, email, password } = await req.json();
+    console.log("userName, email, password", userName, email, password);
 
     // Validate input
     if (!userName || !email || !password) {
@@ -48,7 +49,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         message: "Account created successfully!",
-        user: { id: user.id, userName: user.userName, email: user.email },
+        user: user,
       },
       { status: 201 }
     );
