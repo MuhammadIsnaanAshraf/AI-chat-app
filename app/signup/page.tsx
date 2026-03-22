@@ -37,10 +37,10 @@ export default function SignupPage() {
     try {
       const { data } = await axios.post("/api/auth/signup", { userName, email, password });
       setMessage({ type: "success", text: data.message });
-      setUserName("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
+      // Store user data in localStorage
+      localStorage.setItem("user", JSON.stringify(data.user));
+      // Redirect to chats page
+      window.location.href = "/chats";
     } catch (error: unknown) {
       if (axios.isAxiosError(error) && error.response) {
         setMessage({ type: "error", text: error.response.data.error });
